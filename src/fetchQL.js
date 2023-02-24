@@ -1,10 +1,5 @@
-function fetchQL(args, { queryKey }) {
-  // const { queryKey } = args
-  // debugger
-  const key = queryKey[1]
-  const newPage = args
-  console.log('args', newPage, key)
-  // debugger
+function fetchQL({ queryKey }) {
+  const name = queryKey[1]
   return fetch('https://api.disneyapi.dev/graphql', {
     method: 'POST',
     headers: {
@@ -13,17 +8,11 @@ function fetchQL(args, { queryKey }) {
     body: JSON.stringify({
       query: `
         {
-          characters(page: ${newPage}) {
-            items {
-              _id
-              name
-              imageUrl
-              films
-              tvShows
-            }
-            paginationInfo {
-              totalPages
-            }
+          characterByName(name: "${name}"){
+            _id
+            name
+            films
+            imageUrl
           }
         }
       `,
@@ -32,8 +21,7 @@ function fetchQL(args, { queryKey }) {
   })
     .then((res) => res.json())
     .then((result) => {
-      console.log('results')
-      return result.data.characters.items
+      return result.data.characterByName
     });
 }
 
