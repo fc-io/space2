@@ -1,6 +1,4 @@
 function fetchQL(args, { queryKey }) {
-  // const { queryKey } = args
-  // debugger
   const key = queryKey[1]
   const newPage = args
   console.log('args', newPage, key)

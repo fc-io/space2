@@ -10,7 +10,7 @@ function App() {
   const query = useQuery({
     queryKey: ['page', page],
     queryFn: (arg) => fetchQL(page, arg),
-    // keepPreviousData: true
+    keepPreviousData: true
   })
 
   if (query.isLoading) {
@@ -22,8 +22,8 @@ function App() {
   return (
     <div className="App">
       <h1>Disney</h1>
-      <button onClick={() => setPage(Math.max(1, page - 1))}>Prev</button>
-      <button onClick={() => setPage(page + 1)}>Next</button>
+      <button onClick={() => setPage((p) => Math.max(1, p - 1))}>Prev</button>
+      <button onClick={() => setPage((p) => p + 1)}>Next</button>
       {query.data.map(({ _id, name }) => <div key={_id} style={{marginTop: '1rem'}}>{name}</div>)}
     </div>
   )
