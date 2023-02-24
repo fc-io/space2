@@ -29,7 +29,7 @@ function App() {
   return (
     <div className="App">
       <h1>Space News</h1>
-      {query.data.map(({ title }) => <div style={{marginTop: '1rem'}}>{title}</div>)}
+      {query.data.map(({ id, title }) => <div key={id} style={{marginTop: '1rem'}}>{title}</div>)}
     </div>
   )
 }
