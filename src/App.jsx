@@ -1,22 +1,14 @@
 import { useEffect, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 import './App.css'
-
-// const fetchFromApi = () => {
-//   return
-// }
+import fetchQL from './fetchQL'
 
 function App() {
-  // const [count, setCount] = useState(0)
+  const [page, setPage] = useState(1)
+  console.log('page', page)
   const query = useQuery({
-    queryKey: ['page'],
-    queryFn: () => {
-      return fetch('https://api.spaceflightnewsapi.net/v3/articles')
-        .then((response) => response.json())
-        .then((data) => {
-          return data
-        })
-    }
+    queryKey: ['page', page],
+    queryFn: fetchQL
   })
   // console.log(query)
 
@@ -26,10 +18,20 @@ function App() {
     )
   }
 
+  console.log(query.data)
+  // debugger
+
   return (
     <div className="App">
-      <h1>Space News</h1>
-      {query.data.map(({ id, title }) => <div key={id} style={{marginTop: '1rem'}}>{title}</div>)}
+      <h1>Disney</h1>
+      <button onClick={() => {setPage((p) => Math.max(1, p - 1))}}>Prev</button>
+      <button onClick={() => {setPage((p) => {
+        console.log(p)
+        // debugger
+        return p + 1
+      })}}>Next</button>
+      {query.data.map(({ _id, name }) => <div key={_id} style={{marginTop: '1rem'}}>{name}</div>)}
+
     </div>
   )
 }
