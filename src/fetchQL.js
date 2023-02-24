@@ -1,7 +1,7 @@
 function fetchQL(args, { queryKey }) {
   const key = queryKey[1]
   const newPage = args
-  console.log('args', newPage, key)
+  // console.log('args', newPage, key)
   // debugger
   return fetch('https://api.disneyapi.dev/graphql', {
     method: 'POST',
@@ -31,7 +31,7 @@ function fetchQL(args, { queryKey }) {
     .then((res) => res.json())
     .then((result) => {
       console.log('results')
-      return result.data.characters.items
+      return result.data
     });
 }
 
